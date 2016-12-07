@@ -22,7 +22,9 @@ void Game::GameLoop() {
 	Input input;
 	SDL_Event event;
 
-	this->_player = Sprite(graphics, "content/sprites/MyChar.png", 0, 0, 16, 16, 100, 100);
+	this->_player = AnimatedSprite(graphics, "content/sprites/MyChar.png", 0, 0, 16, 16, 100, 100, 100);
+	this->_player.SetupAnimations();
+	this->_player.PlayAnimation("RunLeft");
 
 	int LAST_UPDATE_TIME = SDL_GetTicks();
 
@@ -61,5 +63,6 @@ void Game::Draw(Graphics &graphics) {
 	graphics.Render();
 }
 
-void Game::Update(float elapsed) {
+void Game::Update(float elapsedTime) {
+	this->_player.Update(elapsedTime);
 }

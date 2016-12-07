@@ -4,6 +4,7 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../source/src/AnimatedSprite.cpp \
 ../source/src/Game.cpp \
 ../source/src/Graphics.cpp \
 ../source/src/Input.cpp \
@@ -11,6 +12,7 @@ CPP_SRCS += \
 ../source/src/main.cpp 
 
 OBJS += \
+./source/src/AnimatedSprite.o \
 ./source/src/Game.o \
 ./source/src/Graphics.o \
 ./source/src/Input.o \
@@ -18,6 +20,7 @@ OBJS += \
 ./source/src/main.o 
 
 CPP_DEPS += \
+./source/src/AnimatedSprite.d \
 ./source/src/Game.d \
 ./source/src/Graphics.d \
 ./source/src/Input.d \
