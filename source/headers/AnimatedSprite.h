@@ -17,9 +17,8 @@ public:
 					int sourceY, int width, int height,
 					float posX, float posY, float timeToUpdate);
 	void PlayAnimation(std::string animation, bool once = false);
-	void Update(int elapsedTime);
+	void Update(float elapsedTime);
 	void Draw(Graphics &graphics, int x, int y);
-	virtual void SetupAnimations();
 
 protected:
 	double _timeToUpdate;
@@ -30,7 +29,8 @@ protected:
 	void ResetAnimations();
 	void StopAnimation();
 	void SetVisible(bool visible);
-	virtual void AnimationDone(std::string animation);
+	virtual void AnimationDone(std::string animation) = 0;
+	virtual void SetupAnimations() = 0;
 
 private:
 	std::map<std::string, std::vector<SDL_Rect> > _animations;

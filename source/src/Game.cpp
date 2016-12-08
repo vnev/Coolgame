@@ -22,9 +22,7 @@ void Game::GameLoop() {
 	Input input;
 	SDL_Event event;
 
-	this->_player = AnimatedSprite(graphics, "content/sprites/MyChar.png", 0, 0, 16, 16, 100, 100, 100);
-	this->_player.SetupAnimations();
-	this->_player.PlayAnimation("RunLeft");
+	this->_player = Player(graphics, 100, 100);
 
 	int LAST_UPDATE_TIME = SDL_GetTicks();
 
@@ -47,6 +45,16 @@ void Game::GameLoop() {
 		if (input.WasKeyPressed(SDL_SCANCODE_ESCAPE)) {
 			return;
 		}
+		else if (input.IsKeyHeld(SDL_SCANCODE_LEFT)) {
+			this->_player.MoveLeft();
+		}
+		else if (input.IsKeyHeld(SDL_SCANCODE_RIGHT)) {
+			this->_player.MoveRight();
+		}
+
+		if (!input.IsKeyHeld(SDL_SCANCODE_LEFT) && !input.IsKeyHeld(SDL_SCANCODE_RIGHT)) {
+			this->_player.StopMoving();
+		}
 
 		const int CURRENT_TIME_MS = SDL_GetTicks();
 		int ELAPSED_TIME_MS = CURRENT_TIME_MS - LAST_UPDATE_TIME;
@@ -59,7 +67,7 @@ void Game::GameLoop() {
 
 void Game::Draw(Graphics &graphics) {
 	graphics.Clear();
-	this->_player.Draw(graphics, 100, 100);
+	this->_player.Draw(graphics);
 	graphics.Render();
 }
 

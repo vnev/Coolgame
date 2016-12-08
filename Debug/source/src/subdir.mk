@@ -8,6 +8,7 @@ CPP_SRCS += \
 ../source/src/Game.cpp \
 ../source/src/Graphics.cpp \
 ../source/src/Input.cpp \
+../source/src/Player.cpp \
 ../source/src/Sprite.cpp \
 ../source/src/main.cpp 
 
@@ -16,6 +17,7 @@ OBJS += \
 ./source/src/Game.o \
 ./source/src/Graphics.o \
 ./source/src/Input.o \
+./source/src/Player.o \
 ./source/src/Sprite.o \
 ./source/src/main.o 
 
@@ -24,6 +26,7 @@ CPP_DEPS += \
 ./source/src/Game.d \
 ./source/src/Graphics.d \
 ./source/src/Input.d \
+./source/src/Player.d \
 ./source/src/Sprite.d \
 ./source/src/main.d 
 

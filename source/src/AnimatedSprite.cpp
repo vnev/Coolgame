@@ -45,7 +45,7 @@ void AnimatedSprite::StopAnimation() {
 	this->AnimationDone(this->_currentAnimation);
 }
 
-void AnimatedSprite::Update(int elapsedTime) {
+void AnimatedSprite::Update(float elapsedTime) {
 	Sprite::Update();
 
 	this->_timeElapsed += elapsedTime;
@@ -75,13 +75,4 @@ void AnimatedSprite::Draw(Graphics &graphics, int x, int y) {
 		SDL_Rect sourceRectangle = this->_animations[this->_currentAnimation][this->_frameIndex];
 		graphics.DrawSurface(this->_spriteSheet, &sourceRectangle, &destinationRectangle);
 	}
-}
-
-void AnimatedSprite::AnimationDone(std::string currentAnimation) {
-
-}
-
-void AnimatedSprite::SetupAnimations() {
-	this->AddAnimation(3, 0, 0, "RunLeft", 16, 16, Vector2());
-	this->AddAnimation(3, 0, 16, "RunRight", 16, 16, Vector2());
 }
