@@ -23,6 +23,7 @@ void Player::SetupAnimations() {
 }
 
 void Player::AnimationDone(std::string currentAnimation) {
+
 }
 
 void Player::MoveLeft() {
@@ -37,8 +38,20 @@ void Player::MoveRight() {
 	this->_facing = RIGHT;
 }
 
+void Player::MoveUp() {
+	this->_dy = -player_constants::WALK_SPEED;
+	this->PlayAnimation("RunUp");
+	this->_facing = UP;
+}
+
+void Player::MoveDown() {
+	this->_dy = player_constants::WALK_SPEED;
+	this->PlayAnimation("RunDown");
+	this->_facing = DOWN;
+}
+
 void Player::StopMoving() {
-	this->_dx = 0;
+	this->_dx = 	this->_dy = 0;
 	this->PlayAnimation(this->_facing == RIGHT ? "IdleRight" : "IdleLeft");
 }
 

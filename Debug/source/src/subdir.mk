@@ -11,7 +11,9 @@ CPP_SRCS += \
 ../source/src/Level.cpp \
 ../source/src/Player.cpp \
 ../source/src/Sprite.cpp \
-../source/src/main.cpp 
+../source/src/Tile.cpp \
+../source/src/main.cpp \
+../source/src/tinyxml2.cpp 
 
 OBJS += \
 ./source/src/AnimatedSprite.o \
@@ -21,7 +23,9 @@ OBJS += \
 ./source/src/Level.o \
 ./source/src/Player.o \
 ./source/src/Sprite.o \
-./source/src/main.o 
+./source/src/Tile.o \
+./source/src/main.o \
+./source/src/tinyxml2.o 
 
 CPP_DEPS += \
 ./source/src/AnimatedSprite.d \
@@ -31,7 +35,9 @@ CPP_DEPS += \
 ./source/src/Level.d \
 ./source/src/Player.d \
 ./source/src/Sprite.d \
-./source/src/main.d 
+./source/src/Tile.d \
+./source/src/main.d \
+./source/src/tinyxml2.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

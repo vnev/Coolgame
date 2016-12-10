@@ -15,6 +15,8 @@ public:
 
 	void MoveLeft();
 	void MoveRight();
+	void MoveUp();
+	void MoveDown();
 	void StopMoving();
 
 	virtual void AnimationDone(std::string animation);
