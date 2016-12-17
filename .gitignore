@@ -2,5 +2,6 @@
 .project
 .settings/
 .DS_Store
+.idea/
 Debug/
 cmake-build-debug/
