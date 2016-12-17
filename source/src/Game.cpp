@@ -21,7 +21,7 @@ void Game::GameLoop() {
 	Input input;
 	SDL_Event event;
 
-	this->_player = Player(graphics, 100, 100);
+	this->_player = Player(graphics, 280, 252);
 	this->_level = Level(graphics, "Map 1", Vector2(100, 100));
 
 	int LAST_UPDATE_TIME = SDL_GetTicks();
@@ -75,4 +75,9 @@ void Game::Draw(Graphics &graphics) {
 void Game::Update(float elapsedTime) {
 	this->_player.Update(elapsedTime);
 	this->_level.Update(elapsedTime);
+
+	std::vector<Rectangle> others;
+	if ((others = this->_level.CheckTileCollisions(this->_player.GetBoundingBox())).size() > 0) {
+		this->_player.HandleTileCollisions(others);
+	}
 }

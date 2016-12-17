@@ -16,6 +16,9 @@ Sprite::Sprite(Graphics &graphics, const std::string &filePath, int sourceX, int
 	if (this->_spriteSheet == NULL) {
 		printf("Error: Could not load image %s\n", filePath.c_str());
 	}
+
+	this->_boundingBox = Rectangle(this->_x, this->_y,
+			width * globals::SPRITE_SCALE, height * globals::SPRITE_SCALE);
 }
 
 
@@ -30,5 +33,34 @@ void Sprite::Draw(Graphics &graphics, int x, int y) {
 }
 
 void Sprite::Update() {
+	this->_boundingBox = Rectangle(this->_x, this->_y,
+			this->_sourceRect.w * globals::SPRITE_SCALE,
+			this->_sourceRect.h * globals::SPRITE_SCALE);
+}
 
+const Rectangle Sprite::GetBoundingBox() const {
+	return this->_boundingBox;
+}
+
+const sides::Side Sprite::GetCollisionSide(Rectangle &other) const {
+	int amtRight, amtLeft, amtTop, amtBottom;
+	amtRight = this->_boundingBox.GetRight() - other.GetLeft();
+	amtLeft = other.GetRight() - this->_boundingBox.GetLeft();
+	amtTop = other.GetBottom() - this->_boundingBox.GetTop();
+	amtBottom = this->_boundingBox.GetBottom() - other.GetTop();
+
+	int vals[4] = { abs(amtRight), abs(amtLeft), abs(amtTop), abs(amtBottom) };
+	int lowest = vals[0];
+	for (int i = 1; i < 4; i++) {
+		if (vals[i] < lowest) {
+			lowest = vals[i];
+		}
+	}
+
+	return
+			lowest == abs(amtRight) ? sides::RIGHT :
+			lowest == abs(amtLeft) ? sides::LEFT :
+			lowest == abs(amtTop) ? sides::TOP :
+			lowest == abs(amtBottom) ? sides::BOTTOM :
+			sides::NONE;
 }

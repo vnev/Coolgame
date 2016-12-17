@@ -3,12 +3,15 @@
 
 namespace player_constants {
 	const float WALK_SPEED = 0.2f;
+	const float GRAVITY = 0.002f;
+	const float GRAVITY_CAP = 0.8f;
 }
 
 Player::Player() {}
 
 Player::Player(Graphics &graphics, float x, float y) :
-	AnimatedSprite(graphics, "content/sprites/MyChar.png", 0, 0, 16, 16, x, y, 100)
+	AnimatedSprite(graphics, "content/sprites/MyChar.png", 0, 0, 16, 16, x, y, 100),
+	_dx(0), _dy(0), _facing(RIGHT), _grounded(false)
 {
 	graphics.LoadImage("content/sprites/MyChar.png");
 	this->SetupAnimations();
@@ -24,6 +27,14 @@ void Player::SetupAnimations() {
 
 void Player::AnimationDone(std::string currentAnimation) {
 
+}
+
+const float Player::GetX() const {
+	return this->_x;
+}
+
+const float Player::GetY() const {
+	return this->_y;
 }
 
 void Player::MoveLeft() {
@@ -55,8 +66,38 @@ void Player::StopMoving() {
 	this->PlayAnimation(this->_facing == RIGHT ? "IdleRight" : "IdleLeft");
 }
 
+void Player::HandleTileCollisions(std::vector<Rectangle> &others) {
+	for (int i = 0; i < others.size(); i++) {
+		sides::Side collisionSide = Sprite::GetCollisionSide(others[i]);
+		if (collisionSide != sides::NONE) {
+			switch (collisionSide) {
+			case sides::TOP:
+				this->_y = others[i].GetBottom() + 1;
+				this->_dy = 0;
+				break;
+			case sides::BOTTOM:
+				this->_y = others[i].GetTop() - this->_boundingBox.GetHeight() - 1;
+				this->_dy = 0;
+				this->_grounded = true;
+				break;
+			case sides::LEFT:
+				this->_x = others[i].GetRight() + 1;
+				break;
+			case sides::RIGHT:
+				this->_y = others[i].GetLeft() - this->_boundingBox.GetWidth() - 1;
+				break;
+			}
+		}
+	}
+}
+
 void Player::Update(float elapsedTime) {
+	if (this->_dy <= player_constants::GRAVITY_CAP) {
+		this->_dy += player_constants::GRAVITY * elapsedTime;
+	}
+
 	this->_x += this->_dx * elapsedTime;
+	this->_y += this->_dy * elapsedTime;
 	AnimatedSprite::Update(elapsedTime);
 }
 

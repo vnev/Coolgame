@@ -14,7 +14,8 @@ Level::Level() {}
 Level::Level(Graphics &graphics, std::string mapName, Vector2 spawn) :
 		_mapName(mapName),
 		_spawnPoint(spawn),
-		_size(Vector2())
+		_size(Vector2()),
+		_background(nullptr)
 {
 	this->LoadMap(graphics, mapName);
 }
@@ -142,6 +143,38 @@ void Level::LoadMap(Graphics &graphics, std::string mapName) {
 				pLayer = pLayer->NextSiblingElement("layer");
 			}
 		}
+
+		// Parse collisions
+		XMLElement* pObjectGroup = mapNode->FirstChildElement("objectgroup");
+		if (pObjectGroup != NULL) {
+			while (pObjectGroup) {
+				const char* name = pObjectGroup->Attribute("name");
+				std::stringstream ss;
+				ss << name;
+				if (ss.str() == "collisions") {
+					XMLElement* pObject = pObjectGroup->FirstChildElement("object");
+					if (pObject != NULL) {
+						while (pObject) {
+							float x, y, width, height;
+							x = pObject->FloatAttribute("x");
+							y = pObject->FloatAttribute("y");
+							width = pObject->FloatAttribute("width");
+							height = pObject->FloatAttribute("height");
+							this->_collisionRects.push_back(Rectangle(
+									std::ceil(x) * globals::SPRITE_SCALE,
+									std::ceil(y) * globals::SPRITE_SCALE,
+									std::ceil(width) * globals::SPRITE_SCALE,
+									std::ceil(height) * globals::SPRITE_SCALE
+							));
+
+							pObject = pObject->NextSiblingElement("object");
+						}
+					}
+				}
+				// other object groups can be parsed here
+				pObjectGroup = pObjectGroup->NextSiblingElement("objectgroup");
+			}
+		}
 }
 
 void Level::Update(float elapsedTime) {
@@ -152,4 +185,15 @@ void Level::Draw(Graphics &graphics) {
 	for (int i = 0; i < this->_tileList.size(); i++) {
 		this->_tileList[i].Draw(graphics);
 	}
+}
+
+std::vector<Rectangle> Level::CheckTileCollisions(const Rectangle &other) {
+	std::vector<Rectangle> others;
+	for (int i = 0; i < _collisionRects.size(); i++) {
+		if (this->_collisionRects.at(i).CollidesWith(other)) {
+			others.push_back(this->_collisionRects.at(i));
+		}
+	}
+
+	return others;
 }

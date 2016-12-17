@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "../headers/Tile.h"
+#include "../headers/Rectangle.h"
 #include "../headers/Global.h"
 
 class Graphics;
@@ -20,12 +21,15 @@ public:
 	void Update(float elapsedTime);
 	void Draw(Graphics &graphics);
 
+	std::vector<Rectangle> CheckTileCollisions(const Rectangle &other);
+
 private:
 	std::string _mapName;
 	Vector2 _spawnPoint, _size, _tileSize;
 	SDL_Texture* _background;
 	std::vector<Tile> _tileList;
 	std::vector<Tileset> _tilesets;
+	std::vector<Rectangle> _collisionRects;
 
 	void LoadMap(Graphics &graphics, std::string mapName);
 };

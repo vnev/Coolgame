@@ -22,9 +22,15 @@ public:
 	virtual void AnimationDone(std::string animation);
 	virtual void SetupAnimations();
 
+	void HandleTileCollisions(std::vector<Rectangle> &others);
+
+	const float GetX() const;
+	const float GetY() const;
+
 private:
 	float _dx, _dy;
 	Direction _facing;
+	bool _grounded;
 };
 
 #endif
