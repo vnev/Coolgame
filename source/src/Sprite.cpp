@@ -1,6 +1,6 @@
-#include "Sprite.h"
-#include "Graphics.h"
-#include "Global.h"
+#include "../headers/Sprite.h"
+#include "../headers/Graphics.h"
+#include "../headers/Global.h"
 
 Sprite::Sprite() {}
 
@@ -24,7 +24,8 @@ Sprite::~Sprite() {
 
 void Sprite::Draw(Graphics &graphics, int x, int y) {
 	SDL_Rect destRect = { x, y,
-			this->_sourceRect.w * globals::SPRITE_SCALE, this->_sourceRect.h * globals::SPRITE_SCALE };
+						  static_cast<int>(this->_sourceRect.w * globals::SPRITE_SCALE),
+						  static_cast<int>(this->_sourceRect.h * globals::SPRITE_SCALE) };
 	graphics.DrawSurface(this->_spriteSheet, &this->_sourceRect, &destRect);
 }
 

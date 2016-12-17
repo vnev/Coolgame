@@ -1,6 +1,6 @@
-#include "AnimatedSprite.h"
-#include "Graphics.h"
-#include "Sprite.h"
+#include "../headers/AnimatedSprite.h"
+#include "../headers/Graphics.h"
+#include "../headers/Sprite.h"
 
 AnimatedSprite::AnimatedSprite() {}
 

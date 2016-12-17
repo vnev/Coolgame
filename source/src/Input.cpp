@@ -1,4 +1,4 @@
-#include "Input.h"
+#include "../headers/Input.h"
 
 void Input::BeginNewFrame() {
 	this->_pressedKeys.clear();

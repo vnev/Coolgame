@@ -1,8 +1,8 @@
 #include <SDL2/SDL.h>
 
-#include "Game.h"
-#include "Graphics.h"
-#include "Input.h"
+#include "../headers/Game.h"
+#include "../headers/Graphics.h"
+#include "../headers/Input.h"
 
 namespace {
 	const int FPS = 50;

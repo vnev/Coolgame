@@ -4,8 +4,8 @@
 #include <string>
 #include <vector>
 
-#include "Tile.h"
-#include "Global.h"
+#include "../headers/Tile.h"
+#include "../headers/Global.h"
 
 class Graphics;
 class SDL_Texture;

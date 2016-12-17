@@ -1,8 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "Global.h"
-#include "AnimatedSprite.h"
+#include "../headers/Global.h"
+#include "../headers/AnimatedSprite.h"
 
 class Graphics;
 

@@ -3,9 +3,9 @@
 #include <algorithm>
 #include <cmath>
 
-#include "Level.h"
-#include "Graphics.h"
-#include "tinyxml2.h"
+#include "../headers/Level.h"
+#include "../headers/Graphics.h"
+#include "../headers/tinyxml2.h"
 
 using namespace tinyxml2;
 

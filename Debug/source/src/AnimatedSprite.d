@@ -1,13 +1,13 @@
 source/src/AnimatedSprite.o: ../source/src/AnimatedSprite.cpp \
-  /Users/chookchutney/Documents/workspace/cavestory/source/headers/AnimatedSprite.h \
+  ../source/src/../headers/AnimatedSprite.h \
   /Users/chookchutney/Documents/workspace/cavestory/source/headers/Sprite.h \
   /Users/chookchutney/Documents/workspace/cavestory/source/headers/Global.h \
-  /Users/chookchutney/Documents/workspace/cavestory/source/headers/Graphics.h
+  ../source/src/../headers/Graphics.h
 
-/Users/chookchutney/Documents/workspace/cavestory/source/headers/AnimatedSprite.h:
+../source/src/../headers/AnimatedSprite.h:
 
 /Users/chookchutney/Documents/workspace/cavestory/source/headers/Sprite.h:
 
 /Users/chookchutney/Documents/workspace/cavestory/source/headers/Global.h:
 
-/Users/chookchutney/Documents/workspace/cavestory/source/headers/Graphics.h:
+../source/src/../headers/Graphics.h:
