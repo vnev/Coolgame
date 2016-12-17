@@ -14,8 +14,7 @@ Game::Game() {
 	this->GameLoop();
 }
 
-Game::~Game() {
-}
+Game::~Game() { }
 
 void Game::GameLoop() {
 	Graphics graphics;
